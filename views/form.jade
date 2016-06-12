@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  //- passed into layout.jade when form.jade is rendered
+  block content
+    .menu
+      h2 Menu
+      ul.nav.nav-pills
+        li
+          a(href='/') Home
+        li.active
+          a(href='/form') Todo List
+        li
+          a(href="/logout") Logout
+
+      title ToDo
+      h1 ToDO
+      form(method="post" action="/create")
+        label(for="comment") Got something to say:
+        input(type="text", name="comment", value=comment)
+        input(type='hidden', value=locals._csrf, name='_csrf')
+        input(type="submit", value="Save")
+      br
+
+
+      - for comment in comments
+        p= comment.title
+          if(comments._id == current)
+            a(class="del-btn" href="/destroy/#{comments._id}", data-csrf=locals._csrf) Del
+

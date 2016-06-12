@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  h1= title
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    .menu
+      h2 Menu
+      ul.nav.nav-pills
+        li.active
+          a(href='/') Home
+        li
+          a(href='/form') Todo List
+        li
+          a(href="/logout") Logout
+        li
+          p #{user.username}
+
